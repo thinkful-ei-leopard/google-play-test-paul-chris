@@ -3,12 +3,22 @@ const morgan = require('morgan');
 const playstoreData = require('./playstore');
 
 const app = express();
+
 app.use(morgan('dev'));
 
-app.get('/', (req,res) => {
- 
+app.get('/apps', (req,res) => {
+  const {sort, genres = ''} = req.query;
 
-  res.json(playstoreData);
+  let results = playstoreData
+    .filter(app => 
+      app
+        .Genres
+        .toLowerCase()
+        .includes(genres.toLowerCase())
+    );
+            
+
+  res.json(results);
 });
 
 app.listen(8000, () => {
