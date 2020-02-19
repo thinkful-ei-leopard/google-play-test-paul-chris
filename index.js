@@ -39,11 +39,8 @@ app.get('/apps', (req,res) => {
         return a[sort] > b[sort] ? 1 : a[sort] < b[sort] ? -1 : 0;
       });
   }
-            
 
   res.json(results);
 });
 
-app.listen(8000, () => {
-  console.log('Express Server is listening on port 8000');
-});
+module.exports = app;
